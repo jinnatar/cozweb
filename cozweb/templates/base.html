@@ -4,13 +4,20 @@
   {% block head %}
   <title>{%block title %}{% endblock %} - CozWeb@{{hubname}}</title>
   {% endblock %}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" />
 </head>
 <body>
-  <div id="content">
+  <header>
+    <div id="header" class="container">
+      <h1>CozWeb@{{hubname}} > {{view}}</h1>
+    </div>
+  </header>
+  <div id="content" class="container">
     {% block content %}
     {% endblock %}
   </div>
-  <div id="footer">
+  <div id="footer" class="container">
     {% block footer %}
       <a href="https://github.com/Artanicus/cozweb">CozWeb</a>
     {% endblock %}

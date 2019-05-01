@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{device['name']}} {% endblock %}
+{% set view = device['name'] %}
 
 {% block content %}
   {% if device %}
