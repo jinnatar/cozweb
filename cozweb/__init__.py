@@ -2,14 +2,26 @@
 
 __version__ = "0.0.1"
 
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app.config.from_object('websiteconfig')
 
 from cozweb import devices
+from cozify import hub
 
-d = devices.CozifyDevices()
+h = devices.CozifyDevices()
 
-@app.route("/")
+@app.route('/')
 def root():
-    return str(d.devicecache)
+    return render_template('index.html', hubname=h.name, devices=h.devicecache)
+
+@app.route('/device/<id>')
+def device(id=None):
+    d = hub.devices()
+    return render_template('device.html', device=d[id])
+    
+@app.route('/device/<id>/toggle')
+def device_toggle(id=None):
+    hub.device_toggle(id)
+    return "Done"
+    

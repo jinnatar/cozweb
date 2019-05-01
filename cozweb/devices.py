@@ -5,8 +5,9 @@ from cozify import hub, cloud
 from cozify.Error import APIError
 
 class CozifyDevices(object):
-    def __init__(self, interval=600):
+    def __init__(self, interval=10):
         self.interval = interval
+        self.name = 'not connected'
         thread = threading.Thread(target=self.run, args=())
         thread.daemon = True
         thread.start()
@@ -18,6 +19,7 @@ class CozifyDevices(object):
             hub.ping()
             # Get and cache all devices.
             self.devicecache = hub.devices()
+            self.name = hub.name(hub.default())
         except APIError as e:
             if e.status_code == 401: # auth failed
                 logging.warning('Auth failed, this should not happen.')

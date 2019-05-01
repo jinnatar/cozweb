@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Devices {% endblock %}
+
+{% block content %}
+  {% if devices %}
+    <ul id="devices">
+      {% for id, device in devices.items() %}
+      <li id="{{id}}">
+        <a href='/device/{{id}}'>
+          {{device['name']}}
+        </a>
+        <a href='/device/{{id}}/toggle'>
+          T
+        </a>
+      </li>
+      {% endfor %}
+    <ul>
+  {% else %}
+    <h2>No devices could be found or no connection to hub.</h2>
+  {% endif %}
+{% endblock %}

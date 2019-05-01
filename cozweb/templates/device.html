@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{device['name']}} {% endblock %}
+
+{% block content %}
+  {% if device %}
+  <pre>
+    {{device|pprint}}
+  </pre>
+  {% else %}
+    <h2>Device not found.</h2>
+  {% endif %}
+{% endblock %}
