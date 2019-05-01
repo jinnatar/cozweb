@@ -6,6 +6,10 @@ from flask import Flask
 app = Flask(__name__)
 app.config.from_object('websiteconfig')
 
+from cozweb import devices
+
+d = devices.CozifyDevices()
+
 @app.route("/")
 def root():
-    return "Index"
+    return str(d.devicecache)
