@@ -33,7 +33,26 @@ header h1 {
  */
 .container {
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }
+
+div.room {
+  height: 500px;
+  margin: auto;
+}
+
+div.room img {
+  vertical-align: middle;
+}
+
+img.on {
+  transform: rotate(180deg);
+  filter: brightness(0.9) invert(.7) sepia(.5) hue-rotate(50deg) saturate(500%);
+}
+
 div.home {
   padding: 10px 0 30px 0;
   background-color: #E6E6FA;

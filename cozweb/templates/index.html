@@ -5,18 +5,30 @@
 
 {% block content %}
   {% if devices %}
-    <ul id="devices">
+  {% if rooms %}
+    {% for room in rooms %}
+    <div class="room">
+    <ul id="{{room}}" class="room">
       {% for id, device in devices.items() %}
+      {% if device['room'] and room in device['room'] %}
       <li id="{{id}}">
         <a href='/device/{{id}}'>
           {{device['name']}}
         </a>
+        {% if 'ON_OFF' in device['capabilities']['values'] %}
         <a href="/device/{{id}}/toggle" class="clickable">
-          T
+          <img {% if not device['state']['isOn'] %}class="on"{% endif %} src="{{url_for('static', filename='img/icons8-toggle-off-50.png')}}" />
         </a>
+        {% endif %}
       </li>
+      {% endif %}
       {% endfor %}
-    <ul>
+    </ul>
+    </div>
+    {% endfor %}
+  {% else %}
+    <h2>Devices were found but they're not sorted into rooms. Add devices that you care about to rooms.</h2>
+  {% endif %}
   {% else %}
     <h2>No devices could be found or no connection to hub.</h2>
   {% endif %}

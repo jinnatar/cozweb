@@ -1,6 +1,6 @@
 $('a.clickable').click(function() {
-  console.log("activert!");
-  console.log(this.href);
   $.get(this.href);
+  $icon = $(this).children("img")[0]
+  $($icon).toggleClass("on");
   return false;
 });

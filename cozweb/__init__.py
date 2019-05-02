@@ -2,6 +2,8 @@
 
 __version__ = "0.0.1"
 
+from absl import logging
+
 from flask import Flask, render_template
 app = Flask(__name__)
 app.config.from_object('websiteconfig')
@@ -13,7 +15,8 @@ h = devices.CozifyDevices()
 
 @app.route('/')
 def root():
-    return render_template('index.html', hubname=h.name, devices=h.devicecache)
+    logging.debug(h.rooms)
+    return render_template('index.html', hubname=h.name, devices=h.devicecache, rooms=h.rooms)
 
 @app.route('/device/<id>')
 def device(id=None):
